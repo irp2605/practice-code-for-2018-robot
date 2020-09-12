@@ -12,42 +12,39 @@ import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import edu.wpi.first.wpilibj.examples.ramsetecommand.Constants.DriveConstants;
 
-public class DriveSubsystem extends SubsystemBase {
+
+public class DriveTrain extends SubsystemBase {
   private final SpeedControllerGroup m_leftMotors =
-      new SpeedControllerGroup(new PWMVictorSPX(DriveConstants.kLeftMotor1Port),
-                               new PWMVictorSPX(DriveConstants.kLeftMotor2Port));
+      new SpeedControllerGroup(new PWMVictorSPX(DConstants.kLeftMotor1Port),
+                               new PWMVictorSPX(DConstants.kLeftMotor2Port));
 
   private final SpeedControllerGroup m_rightMotors =
-      new SpeedControllerGroup(new PWMVictorSPX(DriveConstants.kRightMotor1Port),
-                               new PWMVictorSPX(DriveConstants.kRightMotor2Port));
+      new SpeedControllerGroup(new PWMVictorSPX(DConstants.kRightMotor1Port),
+                               new PWMVictorSPX(DConstants.kRightMotor2Port));
 
  
   private final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotors, m_rightMotors);
 
 
   private final Encoder m_leftEncoder =
-      new Encoder(DriveConstants.kLeftEncoderPorts[0], DriveConstants.kLeftEncoderPorts[1],
-                  DriveConstants.kLeftEncoderReversed);
+      new Encoder(DConstants.kLeftEncoderPorts[0], DConstants.kLeftEncoderPorts[1],
+                  DConstants.kLeftEncoderReversed);
 
  
   private final Encoder m_rightEncoder =
-      new Encoder(DriveConstants.kRightEncoderPorts[0], DriveConstants.kRightEncoderPorts[1],
-                  DriveConstants.kRightEncoderReversed);
+      new Encoder(DConstants.kRightEncoderPorts[0], DConstants.kRightEncoderPorts[1],
+                  DConstants.kRightEncoderReversed);
 
  
-  private final Gyro m_gyro = new ADXRS450_Gyro();
 
-
-  private final DifferentialDriveOdometry m_odometry;
 
   
-  public DriveSubsystem() {
+  public DriveTrain() {
     
-    m_leftEncoder.setDistancePerPulse(DriveConstants.kEncoderDistancePerPulse);
-    m_rightEncoder.setDistancePerPulse(DriveConstants.kEncoderDistancePerPulse);
+    m_leftEncoder.setDistancePerPulse(DConstants.kEncoderDistancePerPulse);
+    m_rightEncoder.setDistancePerPulse(DConstants.kEncoderDistancePerPulse);
 
-    resetEncoders();
-    m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getHeading()));
+    
+    
   }
